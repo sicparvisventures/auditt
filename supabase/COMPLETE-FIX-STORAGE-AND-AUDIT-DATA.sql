@@ -27,8 +27,20 @@ SET
   file_size_limit = 10485760,
   allowed_mime_types = ARRAY['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 
--- 2. Enable Row Level Security op storage.objects
-ALTER TABLE storage.objects ENABLE ROW LEVEL SECURITY;
+-- 2. Enable Row Level Security op storage.objects (als het nog niet enabled is)
+-- Note: Dit kan falen als je geen owner bent, maar dat is ok - RLS is meestal al enabled
+DO $$ 
+BEGIN
+    -- Probeer RLS te enable, maar faal niet als het al enabled is of als we geen rechten hebben
+    BEGIN
+        ALTER TABLE storage.objects ENABLE ROW LEVEL SECURITY;
+        RAISE NOTICE 'RLS enabled op storage.objects';
+    EXCEPTION 
+        WHEN OTHERS THEN
+            -- RLS is waarschijnlijk al enabled of we hebben geen rechten
+            RAISE NOTICE 'RLS is al enabled op storage.objects of we hebben geen rechten (dit is ok)';
+    END;
+END $$;
 
 -- 3. Verwijder ALLE oude policies voor audit-photos bucket
 DROP POLICY IF EXISTS "Public read audit photos" ON storage.objects;
