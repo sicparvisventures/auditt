@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="nl" class="h-full">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <title>Poule & Poulette - Emergency Mode</title>
+    <style>
+        /* Emergency styling als Tailwind niet laadt */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html, body {
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            background: #FBFBF1; /* ppwhite */
+            color: #060709; /* ppblack */
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1C3834; /* olive */
+            margin-bottom: 30px;
+        }
+        
+        .status-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .status-title {
+            font-size: 1.5rem;
+            color: #93231F; /* christmas */
+            margin-bottom: 15px;
+        }
+        
+        .status-message {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #1C3834; /* olive */
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 10px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        
+        .btn:hover {
+            background: #93231F; /* christmas */
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #1C3834;
+            border: 2px solid #1C3834;
+        }
+        
+        .btn-secondary:hover {
+            background: #FDF8C1; /* creme */
+        }
+        
+        .instructions {
+            text-align: left;
+            margin: 30px 0;
+        }
+        
+        .instructions h3 {
+            color: #1C3834;
+            margin: 20px 0 10px 0;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+        }
+        
+        .instructions li {
+            margin: 8px 0;
+        }
+        
+        .code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🐔 Poule & Poulette</div>
+        
+        <div class="status-card">
+            <div class="status-title">⚠️ Development Server Issue</div>
+            <div class="status-message">
+                De localhost server draait niet correct of CSS wordt niet geladen.
+            </div>
+            
+            <div class="warning">
+                <strong>Probleem:</strong> "Laden..." wordt getoond zonder styling
+            </div>
+            
+            <div class="instructions">
+                <h3>🔧 Snelle Oplossing:</h3>
+                <ol>
+                    <li>Open Terminal</li>
+                    <li>Ga naar project directory: <span class="code">cd "/Users/dietmar/Desktop/pp ops -- intern audit"</span></li>
+                    <li>Voer uit: <span class="code">bash quick_fix_localhost.sh</span></li>
+                    <li>Wacht tot "ready" verschijnt</li>
+                    <li>Ga naar <span class="code">http://localhost:3000</span></li>
+                </ol>
+                
+                <h3>🚀 Alternatieve Methoden:</h3>
+                <ol>
+                    <li><strong>Manual fix:</strong> <span class="code">pkill -f "next" && rm -rf .next && npm run dev</span></li>
+                    <li><strong>Andere poort:</strong> <span class="code">npm run dev -- --port 3001</span></li>
+                    <li><strong>Production mode:</strong> <span class="code">npm run build && npm start</span></li>
+                </ol>
+                
+                <h3>🔍 Debug Stappen:</h3>
+                <ol>
+                    <li>Check of server draait: <span class="code">lsof -i :3000</span></li>
+                    <li>Clear browser cache: <span class="code">Cmd+Shift+R</span></li>
+                    <li>Check console voor errors: <span class="code">F12 → Console</span></li>
+                </ol>
+            </div>
+            
+            <div class="success">
+                <strong>✅ Als alles werkt:</strong><br>
+                Je zou mooie styling moeten zien met Poule & Poulette kleuren en fonts.
+            </div>
+            
+            <a href="http://localhost:3000" class="btn">🔄 Probeer localhost:3000</a>
+            <a href="http://localhost:3001" class="btn btn-secondary">🔄 Probeer localhost:3001</a>
+        </div>
+        
+        <div class="status-card">
+            <div class="status-title">📋 Handmatige Login (Emergency)</div>
+            <div class="status-message">
+                Als de normale app niet werkt, gebruik deze login codes:
+            </div>
+            
+            <div class="instructions">
+                <ul style="list-style: none; margin-left: 0;">
+                    <li><strong>ADMIN</strong> - Admin User</li>
+                    <li><strong>MAN01</strong> - COO Manager</li>
+                    <li><strong>MAN02</strong> - Inspector</li>
+                    <li><strong>USER1</strong> - Store Manager</li>
+                    <li><strong>DIET</strong> - Developer</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="margin-top: 40px; color: #666; font-size: 0.9em;">
+            Emergency Mode - Poule & Poulette Audit Tool<br>
+            Als dit scherm blijft verschijnen, neem contact op met support.
+        </div>
+    </div>
+    
+    <script>
+        // Auto-refresh elke 30 seconden om te checken of server weer draait
+        setTimeout(() => {
+            window.location.reload();
+        }, 30000);
+        
+        // Check of localhost:3000 bereikbaar is
+        fetch('http://localhost:3000')
+            .then(response => {
+                if (response.ok) {
+                    document.querySelector('.success').innerHTML = 
+                        '<strong>✅ Server gevonden!</strong><br>Klik op "Probeer localhost:3000" om door te gaan.';
+                }
+            })
+            .catch(() => {
+                // Server niet bereikbaar, doe niets
+            });
+    </script>
+</body>
+</html>
+

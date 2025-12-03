@@ -1,0 +1,13 @@
+# Cloudflare Pages - Next.js static export routing
+/login /login/index.html 200
+/pp-dashboard /pp-dashboard/index.html 200
+/audits /audits/index.html 200
+/acties /acties/index.html 200
+/rapporten /rapporten/index.html 200
+/instellingen /instellingen/index.html 200
+/checklist /checklist/index.html 200
+/test-db /test-db/index.html 200
+/audits/detail /audits/detail/index.html 200
+/audits/new /audits/new/index.html 200
+/acties/detail /acties/detail/index.html 200
+/* /index.html 200

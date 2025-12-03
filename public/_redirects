@@ -1,0 +1,19 @@
+# Cloudflare Pages redirects for Next.js static export
+# Handle client-side routing
+/landing    /landing/index.html   200
+/audits     /audits/index.html    200
+/acties     /acties/index.html    200
+/rapporten  /rapporten/index.html 200
+/instellingen /instellingen/index.html 200
+/checklist  /checklist/index.html 200
+/onboarding /onboarding/index.html 200
+/pp-dashboard /pp-dashboard/index.html 200
+/pp-login   /pp-login/index.html 200
+/organization-login /organization-login/index.html 200
+/info/demo  /info/demo/index.html 200
+/info/pricing /info/pricing/index.html 200
+/info/features /info/features/index.html 200
+/info/carrieres /info/carrieres/index.html 200
+
+# Fallback for all other routes
+/*    /index.html   200

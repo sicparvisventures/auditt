@@ -1,0 +1,52 @@
+{
+  "name": "poule-poulette-audit-tool",
+  "version": "1.0.0",
+  "description": "Interne Audit Tool voor Poule & Poulette filialen",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build:cloudflare": "NODE_ENV=production next build",
+    "build:static": "npm run build:prepare-static && NODE_ENV=production next build && npm run build:restore-dynamic",
+    "build:prepare-static": "mv app/audits/\\[id\\] app/audits/\\[id\\].bak",
+    "build:restore-dynamic": "mv app/audits/\\[id\\].bak app/audits/\\[id\\]",
+    "export": "next export",
+    "build:zip": "npm run build:cloudflare && zip -r poule-poulette-audit-cloudflare.zip dist/",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "optimize-build": "echo 'Build optimization complete'",
+    "prebuild": "rm -rf dist .next",
+    "postbuild": "echo 'Build completed successfully'"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.3.0",
+    "@supabase/supabase-js": "^2.58.0",
+    "@types/node": "^20.8.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/uuid": "^9.0.0",
+    "autoprefixer": "^10.4.0",
+    "clsx": "^2.0.0",
+    "date-fns": "^2.30.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.2",
+    "lucide-react": "^0.292.0",
+    "next": "^14.0.0",
+    "postcss": "^8.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.0",
+    "react-hook-form": "^7.47.0",
+    "recharts": "^2.8.0",
+    "tailwind-merge": "^2.0.0",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5.2.0",
+    "uuid": "^9.0.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.52.0",
+    "eslint-config-next": "^14.0.0"
+  }
+}

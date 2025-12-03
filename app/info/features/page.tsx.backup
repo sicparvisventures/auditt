@@ -1,0 +1,363 @@
+'use client'
+
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { 
+  Check, 
+  Star, 
+  ArrowRight, 
+  Shield, 
+  Zap, 
+  Users, 
+  BarChart3, 
+  Smartphone, 
+  Globe, 
+  Headphones,
+  FileText,
+  Camera,
+  Clock,
+  Settings,
+  Database,
+  Lock,
+  Download,
+  Upload,
+  Bell,
+  Target,
+  TrendingUp,
+  Eye,
+  MessageSquare,
+  Calendar,
+  MapPin
+} from 'lucide-react'
+import { useTranslation } from '@/lib/translation'
+import { LanguageSelector } from '@/components/ui/LanguageSelector'
+
+export default function FeaturesPage() {
+  const router = useRouter()
+  const { t } = useTranslation()
+  const [activeCategory, setActiveCategory] = useState('overview')
+
+  const categories = [
+    { id: 'overview', name: 'Overzicht', icon: Eye },
+    { id: 'audit', name: 'Audit Tools', icon: FileText },
+    { id: 'mobile', name: 'Mobiel', icon: Smartphone },
+    { id: 'analytics', name: 'Analytics', icon: BarChart3 },
+    { id: 'security', name: 'Beveiliging', icon: Shield },
+    { id: 'collaboration', name: 'Samenwerking', icon: Users }
+  ]
+
+  const features = {
+    overview: [
+      {
+        title: 'Volledig Aanpasbaar Platform',
+        description: 'Maak je eigen audit platform dat perfect past bij jouw bedrijf. Van kleine restaurants tot grote retail ketens.',
+        icon: Settings,
+        benefits: ['Custom branding', 'Flexibele workflows', 'Aanpasbare templates', 'Multi-tenant architectuur']
+      },
+      {
+        title: '5-Minuten Setup',
+        description: 'Van idee tot werkend platform in 5 minuten. Geen IT-afdeling nodig, gewoon doen.',
+        icon: Zap,
+        benefits: ['Snelle onboarding', 'Geen technische kennis vereist', 'Direct gebruiksklaar', 'Automatische configuratie']
+      },
+      {
+        title: 'Schaalbaar & Flexibel',
+        description: 'Groeit mee met je bedrijf. Van 1 gebruiker tot duizenden, van 1 locatie tot wereldwijd.',
+        icon: TrendingUp,
+        benefits: ['Onbeperkte schaalbaarheid', 'Multi-locatie support', 'Enterprise ready', 'Cloud-gebaseerd']
+      }
+    ],
+    audit: [
+      {
+        title: 'Intelligente Checklists',
+        description: 'Maak slimme checklists die zich aanpassen aan de situatie. Conditie-gebaseerde vragen en automatische scoring.',
+        icon: FileText,
+        benefits: ['Dynamische checklists', 'Automatische scoring', 'Conditie-gebaseerde vragen', 'Template bibliotheek']
+      },
+      {
+        title: 'Foto & Video Documentatie',
+        description: 'Neem foto\'s en video\'s direct in de app. Automatische geolocatie en timestamp voor complete documentatie.',
+        icon: Camera,
+        benefits: ['Foto & video capture', 'Automatische geolocatie', 'Timestamp documentatie', 'Cloud opslag']
+      },
+      {
+        title: 'Offline Werking',
+        description: 'Voer audits uit zonder internetverbinding. Data wordt automatisch gesynchroniseerd zodra je weer online bent.',
+        icon: Globe,
+        benefits: ['Offline modus', 'Automatische sync', 'Geen data verlies', 'Werkt overal']
+      },
+      {
+        title: 'Real-time Notificaties',
+        description: 'Ontvang direct meldingen over nieuwe audits, deadlines en belangrijke updates.',
+        icon: Bell,
+        benefits: ['Push notificaties', 'Email alerts', 'SMS berichten', 'Custom notificatie regels']
+      }
+    ],
+    mobile: [
+      {
+        title: 'Native Mobile Apps',
+        description: 'Volledig native apps voor iOS en Android. Snelle performance en native gebruikerservaring.',
+        icon: Smartphone,
+        benefits: ['iOS & Android apps', 'Native performance', 'Offline functionaliteit', 'Push notificaties']
+      },
+      {
+        title: 'Responsive Web Interface',
+        description: 'Perfect werkend op elke device. Van smartphone tot desktop, altijd de beste ervaring.',
+        icon: Smartphone,
+        benefits: ['Responsive design', 'Touch-optimized', 'Cross-browser support', 'PWA functionaliteit']
+      },
+      {
+        title: 'GPS & Locatie Tracking',
+        description: 'Automatische locatie tracking voor alle audits. Zie precies waar elke audit is uitgevoerd.',
+        icon: MapPin,
+        benefits: ['GPS tracking', 'Locatie verificatie', 'Route optimalisatie', 'Geofencing']
+      }
+    ],
+    analytics: [
+      {
+        title: 'Live Dashboards',
+        description: 'Real-time dashboards die je audit prestaties live volgen. Zie direct waar je staat en waar je naartoe gaat.',
+        icon: BarChart3,
+        benefits: ['Real-time data', 'Interactieve grafieken', 'Custom dashboards', 'KPI tracking']
+      },
+      {
+        title: 'Geavanceerde Rapportage',
+        description: 'Maak professionele rapporten met één klik. Automatische generatie en custom templates.',
+        icon: FileText,
+        benefits: ['Automatische rapporten', 'Custom templates', 'PDF export', 'Scheduled reports']
+      },
+      {
+        title: 'Trend Analyse',
+        description: 'Analyseer trends over tijd. Identificeer patronen en verbeterpunten in je audit processen.',
+        icon: TrendingUp,
+        benefits: ['Trend analyse', 'Predictive insights', 'Benchmark vergelijking', 'Performance metrics']
+      }
+    ],
+    security: [
+      {
+        title: 'Enterprise Beveiliging',
+        description: 'Je data is veiliger dan een bankkluis. Enterprise encryptie + GDPR compliance = gemoedsrust.',
+        icon: Shield,
+        benefits: ['End-to-end encryptie', 'GDPR compliant', 'SOC 2 Type II', 'Regular security audits']
+      },
+      {
+        title: 'Rol-gebaseerde Toegang',
+        description: 'Controleer wie toegang heeft tot wat. Granulaire permissions en audit trails voor alle acties.',
+        icon: Lock,
+        benefits: ['RBAC systeem', 'Granulaire permissions', 'Audit trails', 'Single Sign-On']
+      },
+      {
+        title: 'Data Backup & Recovery',
+        description: 'Automatische backups en disaster recovery. Je data is altijd veilig en beschikbaar.',
+        icon: Database,
+        benefits: ['Automatische backups', 'Disaster recovery', '99.9% uptime', 'Data redundancy']
+      }
+    ],
+    collaboration: [
+      {
+        title: 'Team Samenwerking',
+        description: 'Werk samen als één team. Deel taken, volg voortgang en communiceer direct in de app.',
+        icon: Users,
+        benefits: ['Team management', 'Task assignment', 'Progress tracking', 'In-app messaging']
+      },
+      {
+        title: 'Real-time Communicatie',
+        description: 'Chat en commentaar direct in audits. Geen externe tools nodig, alles in één platform.',
+        icon: MessageSquare,
+        benefits: ['In-app chat', 'Comment systeem', 'Mention notifications', 'File sharing']
+      },
+      {
+        title: 'Workflow Automatisering',
+        description: 'Automatiseer repetitieve taken. Van audit scheduling tot rapport distributie.',
+        icon: Settings,
+        benefits: ['Workflow automation', 'Scheduled tasks', 'Auto-assignments', 'Escalation rules']
+      }
+    ]
+  }
+
+  return (
+    <div className="min-h-screen style={{ backgroundColor: '#f6f1eb' }}">
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center">
+              <button
+                onClick={() => router.push('/landing')}
+                className="text-2xl font-bold style={{ color: '#132938' }} hover:opacity-80 transition-colors"
+              >
+                AuditFlow
+              </button>
+            </div>
+            <div className="flex items-center space-x-4">
+              <LanguageSelector />
+              <button
+                onClick={() => router.push('/landing')}
+                className="style={{ backgroundColor: '#132938' }} text-white px-6 py-2 rounded-lg hover:opacity-80 transition-colors"
+              >
+                Terug naar Home
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="text-white py-20" style={{ background: 'linear-gradient(135deg, #132938 0%, #1a4a5c 100%)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            Krachtige Features voor
+            <span className="block" style={{ color: '#f6f1eb' }}>Perfecte Audits</span>
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto">
+            Ontdek alle tools en functionaliteiten die AuditFlow tot het meest complete audit platform maken
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              onClick={() => router.push('/landing')}
+              className="text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors flex items-center justify-center"
+              style={{ backgroundColor: '#132938' }}
+            >
+              Start Gratis Trial
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </button>
+            <button
+              onClick={() => router.push('/info/demo')}
+              className="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white transition-colors"
+              style={{ '--hover-text-color': '#132938' } as React.CSSProperties}
+            >
+              Bekijk Demo
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Category Navigation */}
+      <section className="bg-white py-8 sticky top-0 z-10 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap justify-center gap-4">
+            {categories.map((category) => {
+              const Icon = category.icon
+              return (
+                <button
+                  key={category.id}
+                  onClick={() => setActiveCategory(category.id)}
+                  className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-colors ${
+                    activeCategory === category.id
+                      ? 'text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                  style={activeCategory === category.id ? { backgroundColor: '#132938' } : {}}
+                >
+                  <Icon className="h-5 w-5" />
+                  <span>{category.name}</span>
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Grid */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {features[activeCategory as keyof typeof features].map((feature, index) => {
+              const Icon = feature.icon
+              return (
+                <div
+                  key={index}
+                  className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow border border-gray-100"
+                >
+                  <div className="flex items-center mb-4">
+                    <div className="style={{ backgroundColor: '#132938' }} p-3 rounded-lg mr-4">
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900">{feature.title}</h3>
+                  </div>
+                  <p className="text-gray-600 mb-6">{feature.description}</p>
+                  <ul className="space-y-2">
+                    {feature.benefits.map((benefit, benefitIndex) => (
+                      <li key={benefitIndex} className="flex items-center text-sm text-gray-700">
+                        <Check className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                        {benefit}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="text-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            Klaar om te beginnen?
+          </h2>
+          <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+            Start vandaag nog met je gratis trial en ontdek hoe AuditFlow je audit processen kan transformeren.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              onClick={() => router.push('/landing')}
+              className="text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors flex items-center justify-center" style={{ backgroundColor: '#132938' }}
+            >
+              Start Gratis Trial
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </button>
+            <button
+              onClick={() => router.push('/info/contact')}
+              className="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:style={{ color: '#132938' }} transition-colors"
+            >
+              Contact Sales
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <h3 className="text-lg font-semibold mb-4">AuditFlow</h3>
+              <p className="text-gray-400">
+                Het meest complete audit platform voor moderne bedrijven.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Product</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="/info/features" className="hover:text-white">Features</a></li>
+                <li><a href="/info/pricing" className="hover:text-white">Pricing</a></li>
+                <li><a href="/info/demo" className="hover:text-white">Demo</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Support</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="/info/documentatie" className="hover:text-white">Documentatie</a></li>
+                <li><a href="/info/help-center" className="hover:text-white">Help Center</a></li>
+                <li><a href="/info/contact" className="hover:text-white">Contact</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Bedrijf</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="/info/over-ons" className="hover:text-white">Over ons</a></li>
+                <li><a href="/info/blog" className="hover:text-white">Blog</a></li>
+                <li><a href="/info/carrieres" className="hover:text-white">Carrières</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2025 SPM Ventures. Alle rechten voorbehouden.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  )
+}

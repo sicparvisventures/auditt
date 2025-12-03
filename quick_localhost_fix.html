@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuditFlow - Localhost Fix</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1C3834 0%, #93231F 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 2rem;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .logo img {
+            width: 80px;
+            height: auto;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .status {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .status.error {
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .actions {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #F495BD;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="/kipje.png" alt="AuditFlow Logo" onerror="this.style.display='none'">
+        </div>
+        
+        <h1>AuditFlow</h1>
+        <p class="subtitle">Interne Audit Tool voor Poule & Poulette</p>
+        
+        <div class="status error">
+            <strong>⚠️ Localhost Issue Gedetecteerd</strong>
+            <br>
+            <small>De Next.js app laadt niet correct. Hier zijn de oplossingen:</small>
+        </div>
+        
+        <div class="actions">
+            <a href="http://localhost:3000/landing" class="btn">Probeer Landing Pagina</a>
+            <a href="http://localhost:3000/pp-login" class="btn btn-secondary">Direct naar Login</a>
+        </div>
+        
+        <div style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
+            <p><strong>Mogelijke oorzaken:</strong></p>
+            <ul style="text-align: left; margin-top: 1rem;">
+                <li>• Next.js development server is niet gestart</li>
+                <li>• JavaScript errors in de console</li>
+                <li>• CSS bestanden laden niet</li>
+                <li>• Provider components hebben errors</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        console.log('AuditFlow Localhost Fix loaded');
+        
+        // Check if Next.js is running
+        fetch('http://localhost:3000/api/health')
+            .then(response => {
+                if (response.ok) {
+                    console.log('Next.js server is running');
+                }
+            })
+            .catch(error => {
+                console.log('Next.js server is not running or has issues');
+            });
+        
+        // Add some interactivity
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // Add loading state
+                this.textContent = 'Laden...';
+                this.style.opacity = '0.7';
+            });
+        });
+    </script>
+</body>
+</html>
+
+

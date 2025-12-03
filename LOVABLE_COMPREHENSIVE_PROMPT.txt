@@ -1,0 +1,839 @@
+# AUDITFLOW - COMPREHENSIVE LOVABLE PROMPT
+## Ultra Gedetailleerde Specificatie voor Identieke Recreatie
+
+---
+
+## OVERZICHT
+Maak een identieke kopie van de bestaande AuditFlow SaaS audit platform. Dit is een volledig functionerende multi-tenant SaaS applicatie voor interne audits met professionele branding, onboarding, en complete audit functionaliteit.
+
+---
+
+## TECHNISCHE STACK
+- **Frontend**: Next.js 14 met App Router, React 18, TypeScript
+- **Styling**: Tailwind CSS met custom kleurenschema
+- **Backend**: Supabase (PostgreSQL database, Auth, Storage)
+- **State Management**: React Context (AuthProvider)
+- **Forms**: React Hook Form met Zod validation
+- **Charts**: Recharts voor KPI visualisatie
+- **PDF**: jsPDF + html2canvas voor rapporten
+- **Icons**: Lucide React
+- **Deployment**: Cloudflare Pages ready
+
+---
+
+## KLEURENSCHEMA & BRANDING
+
+### Primaire Kleuren
+```css
+--primary-color: #132938 (donkerblauw)
+--secondary-color: #f6f1eb (crème achtergrond)
+--accent-color: #8B8B8B (betongrijs)
+--success-color: #22c55e (groen)
+--warning-color: #f59e0b (oranje)
+--danger-color: #ef4444 (rood)
+--text-primary: #1f2937 (donkergrijs)
+--text-secondary: #6b7280 (lichtgrijs)
+```
+
+### Custom Fonts
+- **Primair**: 'Lino Stamp', 'BentonSans', 'Inter', system-ui, sans-serif
+- **Accent**: 'Bacon Kingdom', 'comic sans ms', cursive
+
+---
+
+## LANDING PAGE SPECIFICATIE
+
+### Header Sectie
+- **Achtergrond**: #f6f1eb (crème)
+- **Logo**: "AuditFlow" tekst met "INTERNAL AUDITS" subtitle
+- **Knoppen**: 
+  - "Inloggen" (outline, #132938 border)
+  - "Start gratis trial" (solid, #132938 background)
+  - Language selector component
+  - Dashboard knop (alleen voor ingelogde gebruikers)
+
+### Hero Sectie
+- **Achtergrond**: #8B8B8B (betongrijs) met gradient overlay
+- **Layout**: 2-kolom grid (tekst links, afbeelding rechts)
+- **Links**: 
+  - nbg.png logo (h-16)
+  - Grote titel met subtitle in #132938
+  - Beschrijving tekst
+  - 2 CTA knoppen (primary + secondary)
+  - Disclaimer tekst
+- **Rechts**: pro.png afbeelding (max-w-full, rounded-lg, shadow-2xl)
+
+### Features Sectie
+6 feature cards in 3-kolom grid:
+1. **Live Insights** - BarChart3 icon, real-time data, interactieve grafieken
+2. **Mobile First** - Smartphone icon, iOS/Android apps, offline functionaliteit
+3. **Security** - Shield icon, end-to-end encryptie, GDPR compliant
+4. **Quick Setup** - Zap icon, snelle onboarding, geen technische kennis
+5. **Team Power** - Users icon, team management, task assignment
+6. **Global Reach** - Globe icon, onbeperkte schaalbaarheid, enterprise ready
+
+### Pricing Sectie
+- **Achtergrond**: #f6f1eb (crème)
+- **Toggle**: Maandelijks/Jaarlijks (20% korting)
+- **3 Pricing Cards**:
+  - **Starter**: €29/maand, 5 gebruikers, 3 locaties, 10 audits
+  - **Professional**: €99/maand (meest populair), 25 gebruikers, 15 locaties, 100 audits
+  - **Enterprise**: €299/maand, onbeperkt, API toegang, white-label
+
+### CTA Sectie
+- **Achtergrond**: #f6f1eb (crème)
+- **2 Knoppen**: "Start Gratis Trial" + "Contact Sales"
+
+### Footer
+- **Achtergrond**: #111827 (donkergrijs)
+- **4 Kolommen**: Product, Support, Bedrijf, Contact
+- **Copyright**: "© 2025 SPM Ventures. Alle rechten voorbehouden."
+
+---
+
+## AUTHENTICATIE SYSTEEM
+
+### Multi-Tenant Login Flow
+1. **Landing Page** → "Inloggen" → Organization Login
+2. **Organization Login** → Toont alle beschikbare organizations
+3. **PP Login** → Originele Poule & Poulette login (behoud functionaliteit)
+4. **Organization Login** → Dynamische login per organization
+
+### Organization Login Pagina
+- **Achtergrond**: #f6f1eb (crème)
+- **Header**: audit.png logo, "Kies je organisatie" titel
+- **Organization Cards**: 
+  - Logo/icon links
+  - Naam, beschrijving, tier badge
+  - ArrowRight icon rechts
+  - Hover effect met #132938 border
+- **Divider**: "Of" met lijn
+- **CTA**: "Nieuwe organisatie aanmaken" knop
+- **Back Link**: "← Terug naar homepage"
+
+### PP Login Pagina
+- **Achtergrond**: #f6f1eb (crème)
+- **Header**: Poule & Poulette logo, "Interne Audit Tool" titel
+- **Form**: 
+  - User ID input (5-cijferige codes)
+  - "Inloggen" knop (#132938 background)
+  - Loading state met spinner
+- **Hardcoded Users**:
+  - ADMIN (admin rol)
+  - MAN01 (coo rol)
+  - MAN02 (inspector rol)
+  - USER1 (storemanager rol)
+  - DIET (developer rol)
+
+### Organization-Specific Login
+- **Dynamic Branding**: Gebruikt organization kleuren
+- **Custom Logo**: Organization logo of eerste letter
+- **Authentication**: Supabase RPC functie `authenticate_user_for_organization`
+
+---
+
+## ONBOARDING FLOW
+
+### Welcome Screen
+- **Tier Info**: Starter/Professional/Enterprise met prijzen en features
+- **CTA**: "Start Setup" knop
+- **Security Badge**: "14 dagen gratis trial • Geen creditcard vereist"
+
+### Stap 1: Bedrijfsinformatie
+- **Velden**:
+  - Bedrijfsnaam (required)
+  - URL Slug (auto-generated, required)
+  - Branche (dropdown, required)
+- **Slug Preview**: "auditflow.com/[slug]"
+- **Validation**: 3-50 karakters, alleen letters/cijfers/streepjes
+
+### Stap 2: Contactgegevens
+- **Velden**:
+  - Contactpersoon (required)
+  - Email adres (required)
+  - Telefoonnummer (optional)
+- **Priority Support Badge**: Voor Professional/Enterprise
+
+### Stap 3: Branding & Template
+- **Template Selectie**:
+  - Restaurant Template (aanbevolen)
+  - Retail Template
+  - Corporate Template (alleen Professional/Enterprise)
+- **Color Presets**:
+  - Professional Blue (#132938, #dc2626, #f59e0b)
+  - Restaurant Green (#059669, #dc2626, #f59e0b)
+  - Corporate Dark (#0f172a, #1e40af, #059669)
+  - Poule & Poulette (#1C3834, #93231F, #F495BD)
+- **Custom Colors**: Voor Professional/Enterprise
+- **Preview**: Live preview van branding
+
+### Stap 4: Geavanceerde Instellingen (Professional/Enterprise)
+- **Fonts**: Primaire en accent lettertype selectie
+- **API Access**: Enterprise only
+- **White-label**: Enterprise only
+
+### Stap 5: Voltooiing
+- **Summary**: Overzicht van alle instellingen
+- **Next Steps**: 3-stappen proces
+- **Success**: Redirect naar organization login
+
+---
+
+## DASHBOARD FUNCTIONALITEIT
+
+### Dashboard Header
+- **User Info**: Naam, rol, avatar
+- **Navigation**: Dashboard, Audits, Filialen, Instellingen
+- **Actions**: Nieuwe audit, Uitloggen
+
+### Filiaal Selector
+- **Dropdown**: Alle filialen + "Alle Filialen" optie
+- **Role-based**: Verschillende opties per rol
+- **Loading**: Skeleton state tijdens laden
+
+### KPI Cards (4-kolom grid)
+1. **Totaal Audits**: Aantal uitgevoerde audits
+2. **Gemiddelde Score**: Score op 0-5 schaal
+3. **Pass Percentage**: Percentage audits ≥80%
+4. **Verbeterpunten**: Aantal terugkerende problemen
+
+### Verbeterpunten Sectie
+- **Card Layout**: Per verbeterpunt
+- **Info**: Item naam, laatste voorkomen, frequentie
+- **Badge**: Frequentie counter
+
+### Audit List
+- **Header**: "Recente Audits" + "Nieuwe Audit" knop
+- **Audit Cards**:
+  - Status icon (CheckCircle/XCircle)
+  - Audit datum en manager
+  - Score en percentage
+  - Opmerkingen (truncated)
+  - Actions: Bekijken, Verwijderen (admin only)
+- **Empty State**: "Geen audits gevonden" met CTA
+
+### Mobile Navigation
+- **Bottom Bar**: 4 tabs (Dashboard, Audits, Filialen, Instellingen)
+- **Active State**: #132938 kleur
+- **Icons**: Home, FileText, Building2, Settings
+
+---
+
+## AUDIT TOOL WERKING
+
+### Nieuwe Audit Flow
+1. **Filiaal Selectie**: Grid van beschikbare filialen
+2. **Audit Form**: Checklist items per categorie
+3. **Scoring**: Automatische berekening
+4. **Photo Upload**: Per checklist item
+5. **Actions**: Automatische actie creatie
+
+### Audit Form Structuur
+- **Header**: Filiaal info, manager, datum, voortgang bar
+- **Categorieën**: Groepeerde checklist items
+- **Per Item**:
+  - Titel en beschrijving
+  - Gewicht indicator
+  - OK/Niet OK knoppen
+  - Opmerkingen textarea
+  - Verbeterpunt (alleen bij Niet OK)
+  - Photo upload component
+- **Algemene Opmerkingen**: Textarea aan het einde
+- **Submit**: "Audit Voltooien" knop
+
+### Checklist Items (Restaurant Template)
+**Categorieën**:
+1. **Exterieur & Toegankelijkheid**
+   - Gevel en ramen schoon
+   - Parkeerplaats netjes
+   - Toegankelijkheid voor mindervaliden
+
+2. **Interieur & Hygiëne**
+   - Vloeren schoon en droog
+   - Tafels en stoelen netjes
+   - Sanitaire voorzieningen schoon
+
+3. **Keuken & Voedselveiligheid**
+   - Koeling op juiste temperatuur
+   - HACCP procedures gevolgd
+   - Persoonlijke hygiëne medewerkers
+
+4. **Service & Klanttevredenheid**
+   - Vriendelijke bediening
+   - Wachtrijen beheerd
+   - Klachtenprocedure bekend
+
+5. **Veiligheid & Procedures**
+   - Brandveiligheid in orde
+   - Eerste hulp materiaal aanwezig
+   - Procedures bekend bij medewerkers
+
+### Scoring Systeem
+- **Scale**: 0-5 punten per item
+- **Weight**: Elk item heeft gewicht (standaard 1.0)
+- **Calculation**: Gewogen gemiddelde
+- **Pass Threshold**: 80% (4.0/5.0)
+- **Breakdown**: Per categorie en totaal
+
+### Photo Upload
+- **Component**: Drag & drop interface
+- **Formats**: JPG, PNG (max 10MB)
+- **Limit**: 5 foto's per item
+- **Storage**: Supabase Storage
+- **Preview**: Thumbnail weergave
+
+### Action Creation
+- **Automatic**: Bij "Niet OK" resultaten
+- **Fields**: Titel, beschrijving, urgentie, deadline
+- **Assignment**: Toegewezen aan filiaal manager
+- **Status**: Pending → In Progress → Completed → Verified
+
+---
+
+## DATABASE SCHEMA
+
+### Core Tables
+```sql
+-- Organizations (Multi-tenant)
+organizations (
+  id UUID PRIMARY KEY,
+  name VARCHAR(255),
+  slug VARCHAR(100) UNIQUE,
+  tier VARCHAR(50),
+  status VARCHAR(50),
+  primary_color VARCHAR(7),
+  secondary_color VARCHAR(7),
+  accent_color VARCHAR(7),
+  background_color VARCHAR(7),
+  text_color VARCHAR(7),
+  primary_font VARCHAR(100),
+  accent_font VARCHAR(100),
+  logo_url TEXT,
+  max_users INTEGER,
+  max_filialen INTEGER,
+  max_audits_per_month INTEGER
+)
+
+-- Users
+gebruikers (
+  id UUID PRIMARY KEY,
+  email CITEXT UNIQUE,
+  naam VARCHAR(255),
+  rol user_role,
+  telefoon VARCHAR(20),
+  actief BOOLEAN,
+  organization_id UUID REFERENCES organizations(id)
+)
+
+-- Locations
+filialen (
+  id UUID PRIMARY KEY,
+  naam VARCHAR(255),
+  locatie VARCHAR(255),
+  district_manager_id UUID REFERENCES gebruikers(id),
+  adres TEXT,
+  telefoon VARCHAR(20),
+  email CITEXT,
+  status filiaal_status,
+  organization_id UUID REFERENCES organizations(id)
+)
+
+-- Checklist Items
+audit_checklist_items (
+  id UUID PRIMARY KEY,
+  categorie VARCHAR(100),
+  titel VARCHAR(255),
+  beschrijving TEXT,
+  gewicht NUMERIC(3,2),
+  volgorde INTEGER,
+  actief BOOLEAN,
+  organization_id UUID REFERENCES organizations(id)
+)
+
+-- Audits
+audits (
+  id UUID PRIMARY KEY,
+  filiaal_id UUID REFERENCES filialen(id),
+  district_manager_id UUID REFERENCES gebruikers(id),
+  audit_datum DATE,
+  status audit_status,
+  totale_score NUMERIC(3,2),
+  pass_percentage NUMERIC(5,2),
+  opmerkingen TEXT
+)
+
+-- Audit Results
+audit_resultaten (
+  id UUID PRIMARY KEY,
+  audit_id UUID REFERENCES audits(id),
+  checklist_item_id UUID REFERENCES audit_checklist_items(id),
+  resultaat audit_result,
+  score INTEGER,
+  opmerkingen TEXT,
+  foto_urls TEXT[],
+  verbeterpunt TEXT
+)
+
+-- Actions
+acties (
+  id UUID PRIMARY KEY,
+  audit_id UUID REFERENCES audits(id),
+  audit_resultaat_id UUID REFERENCES audit_resultaten(id),
+  titel VARCHAR(255),
+  beschrijving TEXT,
+  urgentie urgency_level,
+  status action_status,
+  toegewezen_aan UUID REFERENCES gebruikers(id),
+  deadline DATE,
+  actie_onderneem TEXT,
+  foto_urls TEXT[],
+  voltooid_door UUID REFERENCES gebruikers(id),
+  voltooid_op TIMESTAMPTZ,
+  geverifieerd_door UUID REFERENCES gebruikers(id),
+  geverifieerd_op TIMESTAMPTZ
+)
+
+-- Reports
+rapporten (
+  id UUID PRIMARY KEY,
+  audit_id UUID REFERENCES audits(id),
+  rapport_url TEXT,
+  verstuurd_naar TEXT[],
+  verstuur_datum TIMESTAMPTZ,
+  status report_status
+)
+
+-- Notifications
+notificaties (
+  id UUID PRIMARY KEY,
+  gebruiker_id UUID REFERENCES gebruikers(id),
+  type VARCHAR(50),
+  titel VARCHAR(255),
+  bericht TEXT,
+  actie_id UUID REFERENCES acties(id),
+  gelezen BOOLEAN
+)
+```
+
+### Enums
+```sql
+user_role: 'admin', 'coo', 'district_manager', 'filiaal_manager', 'inspector', 'storemanager', 'developer'
+filiaal_status: 'actief', 'inactief'
+audit_status: 'in_progress', 'completed', 'cancelled'
+audit_result: 'ok', 'niet_ok'
+action_status: 'pending', 'in_progress', 'completed', 'verified'
+urgency_level: 'low', 'medium', 'high', 'critical'
+report_status: 'pending', 'sent', 'failed'
+```
+
+### Database Functions
+```sql
+-- Organization Management
+create_new_organization(org_name, org_slug, org_tier, contact_name, contact_email, ...)
+get_active_organizations()
+get_organization_by_slug(org_slug)
+authenticate_user_for_organization(user_email, org_slug)
+
+-- Audit Management
+calculate_audit_score(resultaten, checklist_items)
+create_actions_from_audit_results(audit_id)
+get_organization_stats(org_id)
+```
+
+---
+
+## SAAS MODEL IMPLEMENTATIE
+
+### Multi-Tenancy
+- **Data Isolation**: Elke organization heeft eigen data
+- **Row Level Security**: Supabase RLS policies
+- **Custom Branding**: Per organization kleuren/fonts
+- **Routing**: `/{slug}/pp-dashboard` pattern
+
+### Pricing Tiers
+1. **Starter (€29/maand)**:
+   - 5 gebruikers, 3 locaties, 10 audits/maand
+   - Basis rapportage, email support
+   - Geen custom branding, geen API
+
+2. **Professional (€99/maand)**:
+   - 25 gebruikers, 15 locaties, 100 audits/maand
+   - Custom branding, priority support
+   - Dashboard analytics, beperkte integraties
+
+3. **Enterprise (€299/maand)**:
+   - Onbeperkte gebruikers/locaties/audits
+   - Volledige custom branding, API toegang
+   - 24/7 support, white-label oplossing
+
+### Organization Creation
+- **Onboarding Flow**: 4-5 stappen afhankelijk van tier
+- **Template Copy**: Checklist items gekopieerd van PP template
+- **Default Setup**: Admin gebruiker, default filialen
+- **Branding**: Custom kleuren en fonts geconfigureerd
+
+### Subscription Management
+- **Trial Period**: 14 dagen gratis
+- **Billing**: Maandelijks/jaarlijks (20% korting)
+- **Limits**: Enforced per tier
+- **Status**: Active, suspended, cancelled
+
+---
+
+## ROUTING STRUCTUUR
+
+### Public Routes
+```
+/landing - SaaS landing page
+/organization-login - Organization selectie
+/onboarding - Nieuwe organization setup
+/info/demo - Demo pagina
+/info/features - Features pagina
+/info/pricing - Pricing pagina
+/info/contact - Contact pagina
+```
+
+### Organization Routes
+```
+/{slug}/login - Organization-specific login
+/{slug}/pp-dashboard - Organization dashboard
+/{slug}/audits - Audit overzicht
+/{slug}/audits/new - Nieuwe audit
+/{slug}/audits/detail - Audit detail
+/{slug}/filialen - Filialen beheer
+/{slug}/instellingen - Instellingen
+```
+
+### PP Specific Routes
+```
+/pp-login - Poule & Poulette login
+/pp/pp-dashboard - PP dashboard
+/pp/audits - PP audits
+/pp/filialen - PP filialen
+/pp/instellingen - PP instellingen
+```
+
+---
+
+## COMPONENT ARCHITECTUUR
+
+### Core Components
+```typescript
+// Layout
+DashboardHeader - User info, navigation
+MobileNavigation - Bottom navigation bar
+LoadingSpinner - Loading states
+Alert - Success/error messages
+
+// Dashboard
+KPICards - 4 KPI metrics
+AuditList - Recent audits list
+FiliaalSelector - Location dropdown
+DashboardFilters - Date/score filters
+
+// Audit
+NewAuditForm - Complete audit form
+AuditDetail - Audit results view
+PhotoUpload - Drag & drop photo upload
+ChecklistItem - Individual checklist item
+
+// Forms
+OnboardingForm - Multi-step onboarding
+OrganizationLogin - Organization selection
+PPLogin - PP-specific login
+
+// UI
+Card, CardHeader, CardBody - Content containers
+Button - Styled buttons with variants
+Input, Textarea - Form inputs
+Badge - Status indicators
+```
+
+### Providers
+```typescript
+AuthProvider - User authentication state
+TranslationProvider - Multi-language support
+ToastProvider - Notification system
+```
+
+---
+
+## STATE MANAGEMENT
+
+### Auth Context
+```typescript
+interface AuthContextType {
+  user: AuthUser | null
+  loading: boolean
+  signIn: (userId: string) => Promise<{success: boolean, error?: string}>
+  signOut: () => Promise<void>
+  updateUser: (updates: Partial<AuthUser>) => Promise<{success: boolean, error?: string}>
+}
+```
+
+### Data Services
+```typescript
+clientDataService - Supabase database operations
+organizationService - Organization management
+auditService - Audit operations
+reportService - Report generation
+```
+
+---
+
+## STYLING & THEMING
+
+### Tailwind Config
+```javascript
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50: '#f0f4f3',
+          800: '#132938', // Main color
+        },
+        accent: {
+          800: '#93231F', // Christmas red
+        },
+        pink: {
+          900: '#F495BD', // Lollypop
+        }
+      },
+      fontFamily: {
+        sans: ['Lino Stamp', 'BentonSans', 'Inter', 'system-ui', 'sans-serif'],
+        bacon: ['Bacon Kingdom', 'comic sans ms', 'cursive'],
+      }
+    }
+  }
+}
+```
+
+### Custom CSS Classes
+```css
+.font-lino-caps { font-family: 'Lino Stamp', cursive; text-transform: uppercase; }
+.font-lino { font-family: 'Lino Stamp', cursive; }
+.badge-success { background-color: #dcfce7; color: #166534; }
+.badge-danger { background-color: #fee2e2; color: #991b1b; }
+```
+
+---
+
+## MOBILE RESPONSIVENESS
+
+### Breakpoints
+- **Mobile**: < 768px
+- **Tablet**: 768px - 1024px
+- **Desktop**: > 1024px
+
+### Mobile Features
+- **Bottom Navigation**: 4-tab navigation
+- **Touch-friendly**: Grote knoppen en touch targets
+- **Swipe Gestures**: Voor audit navigation
+- **Photo Upload**: Camera integration
+- **Offline Support**: Basic offline functionality
+
+---
+
+## PERFORMANCE OPTIMIZATIONS
+
+### Code Splitting
+- **Route-based**: Elke pagina heeft eigen bundle
+- **Component-based**: Lazy loading van zware componenten
+- **Dynamic Imports**: Voor conditional components
+
+### Caching
+- **Static Assets**: CDN caching
+- **API Responses**: Supabase caching
+- **Images**: Optimized loading
+
+### Database
+- **Indexes**: Performance indexes op alle queries
+- **Pagination**: Voor grote datasets
+- **Lazy Loading**: Voor audit lists
+
+---
+
+## SECURITY IMPLEMENTATION
+
+### Authentication
+- **Multi-tenant**: Organization-based isolation
+- **Role-based**: Different permissions per rol
+- **Session Management**: Secure token handling
+
+### Data Protection
+- **Row Level Security**: Supabase RLS policies
+- **Input Validation**: Zod schemas
+- **XSS Protection**: Sanitized inputs
+- **CSRF Protection**: Next.js built-in
+
+### API Security
+- **Rate Limiting**: Per organization
+- **CORS**: Configured for production
+- **Environment Variables**: Secure config
+
+---
+
+## TESTING STRATEGY
+
+### Unit Tests
+- **Components**: React Testing Library
+- **Utils**: Jest tests
+- **Services**: Mock Supabase calls
+
+### Integration Tests
+- **Auth Flow**: Complete login flow
+- **Audit Creation**: End-to-end audit process
+- **Organization Setup**: Onboarding flow
+
+### E2E Tests
+- **Critical Paths**: User journeys
+- **Cross-browser**: Chrome, Safari, Firefox
+- **Mobile**: Responsive testing
+
+---
+
+## DEPLOYMENT CONFIGURATION
+
+### Environment Variables
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+NEXT_PUBLIC_APP_URL=your_app_url
+```
+
+### Build Configuration
+```javascript
+// next.config.js
+const nextConfig = {
+  output: 'export', // For Cloudflare Pages
+  distDir: 'dist',
+  images: {
+    unoptimized: true,
+  },
+  trailingSlash: false,
+}
+```
+
+### Cloudflare Pages
+- **Build Command**: `npm run build`
+- **Build Output**: `dist/`
+- **Environment**: Production
+- **Custom Domain**: Configured
+
+---
+
+## MONITORING & ANALYTICS
+
+### Error Tracking
+- **Console Logging**: Detailed error logs
+- **User Feedback**: Error reporting
+- **Performance**: Core Web Vitals
+
+### Usage Analytics
+- **Organization Stats**: Usage per organization
+- **Audit Metrics**: Audit completion rates
+- **User Activity**: Login patterns
+
+### Business Metrics
+- **Conversion**: Trial to paid conversion
+- **Retention**: User retention rates
+- **Revenue**: Subscription revenue tracking
+
+---
+
+## MAINTENANCE & SUPPORT
+
+### Database Maintenance
+- **Cleanup**: Inactive organizations
+- **Backups**: Regular database backups
+- **Updates**: Schema migrations
+
+### Content Management
+- **Checklist Items**: Admin interface
+- **Templates**: Organization templates
+- **Branding**: Custom branding updates
+
+### Support System
+- **Help Center**: Documentation
+- **Contact Forms**: Support requests
+- **Status Page**: System status
+
+---
+
+## CRITICAL SUCCESS FACTORS
+
+### Identieke Functionaliteit
+1. **Exacte UI**: Alle kleuren, fonts, spacing identiek
+2. **Complete Features**: Alle functionaliteit werkend
+3. **Data Flow**: Identieke database structuur
+4. **User Experience**: Zelfde gebruikerservaring
+
+### Performance
+1. **Loading Times**: < 2s voor alle pagina's
+2. **Mobile Performance**: Smooth op alle devices
+3. **Database Queries**: Geoptimaliseerde queries
+4. **Image Loading**: Snelle foto uploads
+
+### Scalability
+1. **Multi-tenant**: Schaalbaar naar duizenden organizations
+2. **Database**: Geoptimaliseerd voor groei
+3. **CDN**: Snelle asset delivery
+4. **Caching**: Intelligente caching strategie
+
+---
+
+## DELIVERABLES CHECKLIST
+
+### Frontend Components
+- [ ] Landing page (exacte kopie)
+- [ ] Organization login flow
+- [ ] Onboarding process (4-5 stappen)
+- [ ] Dashboard met KPI's
+- [ ] Audit creation form
+- [ ] Photo upload component
+- [ ] Mobile navigation
+- [ ] Responsive design
+
+### Backend Integration
+- [ ] Supabase database setup
+- [ ] Authentication system
+- [ ] Multi-tenant data isolation
+- [ ] Organization management
+- [ ] Audit scoring system
+- [ ] Photo storage
+- [ ] Report generation
+
+### SaaS Features
+- [ ] Pricing tiers
+- [ ] Subscription management
+- [ ] Custom branding
+- [ ] Organization templates
+- [ ] User management
+- [ ] Role-based permissions
+
+### Quality Assurance
+- [ ] Cross-browser testing
+- [ ] Mobile responsiveness
+- [ ] Performance optimization
+- [ ] Security implementation
+- [ ] Error handling
+- [ ] Loading states
+
+---
+
+## FINAL NOTES
+
+Deze applicatie moet **IDENTIEK** zijn aan de bestaande versie. Elke pixel, elke functionaliteit, elke interactie moet exact hetzelfde zijn. De gebruiker moet niet kunnen merken dat het een nieuwe implementatie is.
+
+**Belangrijk**: 
+- Behoud alle bestaande functionaliteit
+- Identieke user experience
+- Zelfde performance karakteristieken
+- Complete feature parity
+- Professionele SaaS kwaliteit
+
+De applicatie moet klaar zijn voor productie gebruik met duizenden gebruikers en honderden organizations.
+
+
