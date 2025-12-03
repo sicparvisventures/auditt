@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Cloudflare Pages configuration - simplified for static export
-  output: 'export',
-  distDir: 'dist',
-  trailingSlash: true,
+  // Vercel configuration - server-side rendering enabled
+  // Remove static export for Vercel deployment
+  // output: 'export', // Disabled for Vercel
+  // distDir: 'dist', // Use default .next for Vercel
+  trailingSlash: false, // Vercel prefers no trailing slash
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -11,8 +12,20 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    unoptimized: true,
-    domains: ['localhost'],
+    // Enable image optimization for Vercel
+    unoptimized: false,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'kauerobifkgjvddyrkuz.supabase.co',
+        pathname: '/storage/v1/object/public/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.supabase.co',
+        pathname: '/storage/v1/object/public/**',
+      },
+    ],
   },
   // Optimize bundle size
   compiler: {

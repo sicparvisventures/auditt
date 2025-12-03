@@ -16,7 +16,6 @@
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "optimize-build": "echo 'Build optimization complete'",
-    "prebuild": "rm -rf dist .next",
     "postbuild": "echo 'Build completed successfully'"
   },
   "dependencies": {

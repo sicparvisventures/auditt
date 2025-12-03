@@ -32,6 +32,14 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
+# Cloudflare deployment folders (not needed for Vercel)
+cloudflare-deployment/
+cloudflare-deployment 2/
+dist/
+dist 2/
+*.zip
+*.tar.gz
+
 # vercel
 .vercel
 
