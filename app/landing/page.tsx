@@ -70,40 +70,44 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#f6f1eb' }}>
-      {/* Header - Crème achtergrond */}
+      {/* Header - Crème achtergrond - Mobile First */}
       <header style={{ backgroundColor: '#f6f1eb' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            {/* Links: AuditFlow logo */}
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-3 sm:py-4">
+            {/* Links: AuditFlow logo - Responsive size */}
             <div className="flex items-center">
               <img 
                 src="/fulllogo.png" 
                 alt="AuditFlow Logo" 
-                className="h-12 w-auto"
+                className="h-8 sm:h-10 md:h-12 w-auto"
               />
             </div>
 
-            {/* Rechts: Knoppen en language selector */}
-            <div className="flex items-center space-x-4">
+            {/* Rechts: Knoppen en language selector - Mobile optimized */}
+            <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
               <button
                 onClick={() => router.push('/organization-login')}
-                className="px-4 py-2 rounded-lg hover:opacity-80 transition-colors font-body"
+                className="px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-lg hover:opacity-80 transition-colors font-body text-xs sm:text-sm md:text-base"
                 style={{ backgroundColor: '#f6f1eb', color: '#132938', border: '2px solid #132938' }}
               >
                 {t('login.title')}
               </button>
               <button
                 onClick={() => router.push('/onboarding')}
-                className="text-white px-4 py-2 rounded-lg hover:opacity-80 transition-colors font-body"
+                className="text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-lg hover:opacity-80 transition-colors font-body text-xs sm:text-sm md:text-base whitespace-nowrap"
                 style={{ backgroundColor: '#132938' }}
               >
-                Start gratis trial
+                <span className="hidden sm:inline">Start gratis trial</span>
+                <span className="sm:hidden">Trial</span>
               </button>
-              <LanguageSelector />
+              <div className="hidden sm:block">
+                <LanguageSelector />
+              </div>
+              {/* Dashboard knop alleen op desktop (md en groter) */}
               {user && (
                 <button
                   onClick={() => router.push('/pp-dashboard')}
-                  className="text-white px-6 py-2 rounded-lg hover:opacity-80 transition-colors font-body"
+                  className="hidden md:block text-white px-4 md:px-6 py-2 rounded-lg hover:opacity-80 transition-colors font-body text-sm md:text-base"
                   style={{ backgroundColor: '#132938' }}
                 >
                   {t('nav.dashboard')}
@@ -114,43 +118,43 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* Hero Section - Betongrijs achtergrond met gradient overlay, nbg.png, tekst links en pro.png rechts */}
-      <section className="min-h-[90vh] flex items-start pt-20 relative" style={{ backgroundColor: '#8B8B8B' }}>
+      {/* Hero Section - Betongrijs achtergrond met gradient overlay, nbg.png, tekst links en pro.png rechts - Mobile First */}
+      <section className="min-h-[85vh] sm:min-h-[90vh] flex items-start pt-8 sm:pt-12 md:pt-16 lg:pt-20 pb-8 sm:pb-12 relative" style={{ backgroundColor: '#8B8B8B' }}>
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-gray-800/30 via-gray-700/20 to-gray-900/40"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Tekst links */}
-            <div className="flex flex-col">
-              {/* nbg.png image */}
-              <div className="mb-6">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 w-full relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
+            {/* Tekst links - Mobile First */}
+            <div className="flex flex-col order-2 lg:order-1">
+              {/* nbg.png image - Responsive size */}
+              <div className="mb-4 sm:mb-6">
                 <img 
                   src="/nbg.png" 
                   alt="AuditFlow Logo" 
-                  className="h-16 w-auto"
+                  className="h-12 sm:h-14 md:h-16 w-auto"
                 />
               </div>
               {/* Text content that aligns with pro.png */}
               <div className="flex-1 flex flex-col justify-start min-h-0">
-                <h1 className="text-4xl md:text-6xl font-light mb-6 font-display" style={{ color: 'white' }}>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-4 sm:mb-6 font-display leading-tight" style={{ color: 'white' }}>
                   {t('landing.hero.title')}
-                  <span className="block font-medium" style={{ color: '#132938' }}>{t('landing.hero.subtitle')}</span>
+                  <span className="block font-medium mt-1 sm:mt-2" style={{ color: '#132938' }}>{t('landing.hero.subtitle')}</span>
                 </h1>
-                <p className="text-xl md:text-2xl mb-8 text-white font-light font-body">
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 text-white font-light font-body leading-relaxed">
                   {t('landing.hero.description')}
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <button
                     onClick={() => router.push('/onboarding')}
-                    className="text-white px-8 py-4 rounded-lg text-lg font-medium transition-colors flex items-center justify-center font-body"
+                    className="text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-medium transition-colors flex items-center justify-center font-body w-full sm:w-auto"
                     style={{ backgroundColor: '#132938' }}
                   >
                     {t('landing.hero.cta.primary')}
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                   </button>
                   <button
                     onClick={() => router.push('/info/demo')}
-                    className="border-2 px-8 py-4 rounded-lg text-lg font-medium transition-colors font-body"
+                    className="border-2 px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-medium transition-colors font-body w-full sm:w-auto"
                     style={{ 
                       borderColor: '#132938', 
                       color: '#132938',
@@ -168,51 +172,51 @@ export default function LandingPage() {
                     {t('landing.hero.cta.secondary')}
                   </button>
                 </div>
-                <p className="text-sm mt-4 text-white font-light font-body">
+                <p className="text-xs sm:text-sm mt-3 sm:mt-4 text-white font-light font-body leading-relaxed">
                   {t('landing.hero.disclaimer')}
                 </p>
               </div>
             </div>
 
-            {/* Afbeelding rechts */}
-            <div className="flex justify-center lg:justify-end items-center">
+            {/* Afbeelding rechts - Mobile First (boven op mobiel) */}
+            <div className="flex justify-center lg:justify-end items-center order-1 lg:order-2 mb-4 sm:mb-6 lg:mb-0">
               <img 
                 src="/pro.png" 
                 alt="AuditFlow Platform" 
-                className="max-w-full h-auto rounded-lg shadow-2xl"
+                className="max-w-full h-auto rounded-lg shadow-2xl w-full sm:w-auto"
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-light mb-6 font-display" style={{ color: '#132938' }}>
+      {/* Features Section - Mobile First */}
+      <section className="py-8 sm:py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-light mb-4 sm:mb-6 font-display px-2" style={{ color: '#132938' }}>
               {t('landing.features.title')}
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light font-body">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto font-light font-body px-2">
               {t('landing.features.subtitle')}
             </p>
           </div>
 
-          {/* Interactive Feature Icons */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-12">
+          {/* Interactive Feature Icons - Mobile First Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-10 md:mb-12">
             {/* Live Insights Icon */}
             <div 
               className="flex flex-col items-center cursor-pointer group transition-all duration-300 hover:scale-110"
               onClick={() => setActiveFeature(activeFeature === 0 ? null : 0)}
             >
-              <div className="p-6 rounded-2xl shadow-lg transition-all duration-300 group-hover:shadow-2xl" style={{ backgroundColor: '#000813' }}>
+              <div className="p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl shadow-lg transition-all duration-300 group-hover:shadow-2xl" style={{ backgroundColor: '#000813' }}>
                 <img 
                   src="/icon3.png" 
                   alt="Live Insights Icon" 
-                  className="h-12 w-12 transition-all duration-300 group-hover:scale-110"
+                  className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 transition-all duration-300 group-hover:scale-110"
                 />
               </div>
-              <p className="mt-3 text-sm font-medium text-gray-700 text-center font-body">Live Insights</p>
+              <p className="mt-2 sm:mt-3 text-xs sm:text-sm font-medium text-gray-700 text-center font-body">Live Insights</p>
             </div>
 
             {/* Mobile First Icon */}
@@ -220,10 +224,10 @@ export default function LandingPage() {
               className="flex flex-col items-center cursor-pointer group transition-all duration-300 hover:scale-110"
               onClick={() => setActiveFeature(activeFeature === 1 ? null : 1)}
             >
-              <div className="p-6 rounded-2xl shadow-lg transition-all duration-300 group-hover:shadow-2xl" style={{ backgroundColor: '#000813' }}>
-                <Smartphone className="h-12 w-12 text-white transition-all duration-300 group-hover:scale-110" />
+              <div className="p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl shadow-lg transition-all duration-300 group-hover:shadow-2xl" style={{ backgroundColor: '#000813' }}>
+                <Smartphone className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white transition-all duration-300 group-hover:scale-110" />
               </div>
-              <p className="mt-3 text-sm font-medium text-gray-700 text-center font-body">Mobiel Eerst</p>
+              <p className="mt-2 sm:mt-3 text-xs sm:text-sm font-medium text-gray-700 text-center font-body">Mobiel Eerst</p>
             </div>
 
             {/* Security Icon */}
@@ -231,10 +235,10 @@ export default function LandingPage() {
               className="flex flex-col items-center cursor-pointer group transition-all duration-300 hover:scale-110"
               onClick={() => setActiveFeature(activeFeature === 2 ? null : 2)}
             >
-              <div className="p-6 rounded-2xl shadow-lg transition-all duration-300 group-hover:shadow-2xl" style={{ backgroundColor: '#000813' }}>
-                <Shield className="h-12 w-12 text-white transition-all duration-300 group-hover:scale-110" />
+              <div className="p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl shadow-lg transition-all duration-300 group-hover:shadow-2xl" style={{ backgroundColor: '#000813' }}>
+                <Shield className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white transition-all duration-300 group-hover:scale-110" />
               </div>
-              <p className="mt-3 text-sm font-medium text-gray-700 text-center font-body">Fort Knox Security</p>
+              <p className="mt-2 sm:mt-3 text-xs sm:text-sm font-medium text-gray-700 text-center font-body">Fort Knox Security</p>
             </div>
 
             {/* Quick Setup Icon */}
@@ -242,10 +246,10 @@ export default function LandingPage() {
               className="flex flex-col items-center cursor-pointer group transition-all duration-300 hover:scale-110"
               onClick={() => setActiveFeature(activeFeature === 3 ? null : 3)}
             >
-              <div className="p-6 rounded-2xl shadow-lg transition-all duration-300 group-hover:shadow-2xl" style={{ backgroundColor: '#000813' }}>
-                <Zap className="h-12 w-12 text-white transition-all duration-300 group-hover:scale-110" />
+              <div className="p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl shadow-lg transition-all duration-300 group-hover:shadow-2xl" style={{ backgroundColor: '#000813' }}>
+                <Zap className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white transition-all duration-300 group-hover:scale-110" />
               </div>
-              <p className="mt-3 text-sm font-medium text-gray-700 text-center font-body">5-Minuten Magic</p>
+              <p className="mt-2 sm:mt-3 text-xs sm:text-sm font-medium text-gray-700 text-center font-body">5-Minuten Magic</p>
             </div>
 
             {/* Team Power Icon */}
@@ -253,10 +257,10 @@ export default function LandingPage() {
               className="flex flex-col items-center cursor-pointer group transition-all duration-300 hover:scale-110"
               onClick={() => setActiveFeature(activeFeature === 4 ? null : 4)}
             >
-              <div className="p-6 rounded-2xl shadow-lg transition-all duration-300 group-hover:shadow-2xl" style={{ backgroundColor: '#000813' }}>
-                <Users className="h-12 w-12 text-white transition-all duration-300 group-hover:scale-110" />
+              <div className="p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl shadow-lg transition-all duration-300 group-hover:shadow-2xl" style={{ backgroundColor: '#000813' }}>
+                <Users className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white transition-all duration-300 group-hover:scale-110" />
               </div>
-              <p className="mt-3 text-sm font-medium text-gray-700 text-center font-body">Team Power</p>
+              <p className="mt-2 sm:mt-3 text-xs sm:text-sm font-medium text-gray-700 text-center font-body">Team Power</p>
             </div>
 
             {/* Global Reach Icon */}
@@ -264,10 +268,10 @@ export default function LandingPage() {
               className="flex flex-col items-center cursor-pointer group transition-all duration-300 hover:scale-110"
               onClick={() => setActiveFeature(activeFeature === 5 ? null : 5)}
             >
-              <div className="p-6 rounded-2xl shadow-lg transition-all duration-300 group-hover:shadow-2xl" style={{ backgroundColor: '#000813' }}>
-                <Globe className="h-12 w-12 text-white transition-all duration-300 group-hover:scale-110" />
+              <div className="p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl shadow-lg transition-all duration-300 group-hover:shadow-2xl" style={{ backgroundColor: '#000813' }}>
+                <Globe className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white transition-all duration-300 group-hover:scale-110" />
               </div>
-              <p className="mt-3 text-sm font-medium text-gray-700 text-center font-body">Global Reach</p>
+              <p className="mt-2 sm:mt-3 text-xs sm:text-sm font-medium text-gray-700 text-center font-body">Global Reach</p>
             </div>
           </div>
 
@@ -468,14 +472,14 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="py-16" style={{ backgroundColor: '#f6f1eb' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-light mb-6 font-display" style={{ color: '#132938' }}>
+      {/* Pricing Section - Mobile First */}
+      <section className="py-8 sm:py-12 md:py-16" style={{ backgroundColor: '#f6f1eb' }}>
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-light mb-4 sm:mb-6 font-display px-2" style={{ color: '#132938' }}>
               Kies je perfecte plan
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 font-light font-body">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-6 sm:mb-8 font-light font-body px-2">
               Van startup tot enterprise - we hebben het juiste plan voor elke organisatie
             </p>
             
@@ -508,7 +512,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {/* Starter Plan */}
             <div className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow border border-gray-100 relative flex flex-col">
               <div className="text-center mb-8">
@@ -702,27 +706,27 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16" style={{ backgroundColor: '#f6f1eb' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-light mb-6 font-display" style={{ color: '#132938' }}>
+      {/* CTA Section - Mobile First */}
+      <section className="py-8 sm:py-12 md:py-16" style={{ backgroundColor: '#f6f1eb' }}>
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-light mb-4 sm:mb-6 font-display px-2" style={{ color: '#132938' }}>
             Klaar om te beginnen?
           </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto font-light font-body">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto font-light font-body px-2">
             Start vandaag nog met je gratis trial en ontdek hoe AuditFlow je audit processen kan transformeren.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-2">
             <button
               onClick={() => router.push('/onboarding')}
-              className="text-white px-8 py-4 rounded-lg text-lg font-medium transition-colors flex items-center justify-center hover:opacity-90 font-body"
+              className="text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-medium transition-colors flex items-center justify-center hover:opacity-90 font-body w-full sm:w-auto"
               style={{ backgroundColor: '#132938' }}
             >
               Start Gratis Trial
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
             </button>
             <button
               onClick={() => router.push('/info/contact')}
-              className="border-2 px-8 py-4 rounded-lg text-lg font-medium transition-colors font-body"
+              className="border-2 px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-medium transition-colors font-body w-full sm:w-auto"
               style={{ 
                 borderColor: '#132938', 
                 color: '#132938',
@@ -743,10 +747,10 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      {/* Footer - Mobile First */}
+      <footer className="bg-gray-900 text-white py-8 sm:py-10 md:py-12">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
             <div>
               <div className="flex items-center mb-4">
                 <div className="text-left">
