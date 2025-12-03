@@ -24,10 +24,27 @@ export const uploadFile = async (
       }
     }
 
-    // Generate file path
-    const fileExt = file.name.split('.').pop()
+    // Generate file path - ensure it's clean and doesn't start with /
+    const fileExt = file.name.split('.').pop() || 'jpg'
+    const sanitizedFileName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_')
     const fileName = path || `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`
-    const filePath = `audit-photos/${fileName}`
+    
+    // Clean path - remove leading/trailing slashes and ensure proper format
+    let filePath = fileName.trim().replace(/^\/+|\/+$/g, '')
+    
+    // If path contains directory structure (e.g., "itemId/timestamp-filename.jpg")
+    // ensure it's properly formatted
+    if (filePath.includes('/')) {
+      filePath = filePath.split('/').filter(Boolean).join('/')
+    }
+
+    console.log('📤 Uploading file to Supabase Storage:', {
+      bucket,
+      filePath,
+      fileName: file.name,
+      fileSize: file.size,
+      fileType: file.type
+    })
 
     // Upload to Supabase Storage
     const { data, error: uploadError } = await supabase.storage
@@ -38,10 +55,15 @@ export const uploadFile = async (
       })
 
     if (uploadError) {
-      console.error('Supabase upload error:', uploadError)
+      console.error('❌ Supabase upload error:', uploadError)
+      console.error('Upload error details:', {
+        message: uploadError.message,
+        statusCode: uploadError.statusCode,
+        error: uploadError.error
+      })
       return {
         success: false,
-        error: uploadError.message || 'Upload failed'
+        error: uploadError.message || 'Upload failed. Check RLS policies in Supabase.'
       }
     }
 
@@ -50,12 +72,14 @@ export const uploadFile = async (
       .from(bucket)
       .getPublicUrl(filePath)
 
+    console.log('✅ File uploaded successfully:', publicUrl)
+
     return {
       success: true,
       url: publicUrl
     }
   } catch (error: any) {
-    console.error('Upload error:', error)
+    console.error('❌ Upload error:', error)
     return {
       success: false,
       error: error.message || 'Upload failed'
