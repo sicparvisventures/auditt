@@ -364,5 +364,12 @@ FROM audit_resultaten ar
 ORDER BY ar.created_at DESC
 LIMIT 5;
 
-RAISE NOTICE '✅ COMPLETE FIX APPLIED - Storage en Database zijn nu geconfigureerd voor anon access!';
+-- Final success message
+DO $$
+BEGIN
+    RAISE NOTICE '✅ COMPLETE FIX APPLIED - Storage en Database zijn nu geconfigureerd voor anon access!';
+END $$;
+
+-- Show success message as query result
+SELECT '✅ COMPLETE FIX APPLIED - Storage en Database zijn nu geconfigureerd voor anon access!' as status;
 
